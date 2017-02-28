@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "express": "^4.13.1",
+    "consolidate": "^0.13.1",
+   	"underscore": "^1.8.3",
+	"underscore.string": "^3.1.1",
+    "node-jose": "^0.9.2",
+    "nosql": "^3.0.3"
+  }
+}
