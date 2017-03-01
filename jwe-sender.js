@@ -24,30 +24,14 @@ var JWK = jose.JWK;
 
 var token_mod_13 = ["a", "eyJhbGciOiJFQ0RILUVTK0ExMjhLVyIsImVuYyI6IkExMjhDQkMtSFMyNTYiLCJlcGsiOnsia3R5IjoiRUMiLCJ4IjoiZ1RsaTY1ZVRRN3otQmgxNDdmZjhLM203azJVaURpRzJMcFlrV0FhRkpDYyIsInkiOiJjTEFuakthNGJ6akQ3REpWUHdhOUVQclJ6TUc3ck9OZ3NpVUQta2YzMEZzIiwiY3J2IjoiUC0yNTYifX0.qGAdxtEnrV_3zbIxU2ZKrMWcejNltjA_dtefBFnRh9A2z9cNIqYRWg.pEA5kX304PMCOmFSKX_cEg.a9fwUrx2JXi1OnWEMOmZhXd94-bEGCH9xxRwqcGuG2AMo-AwHoljdsH5C_kcTqlXS5p51OB1tvgQcMwB5rpTxg.72CHiYFecyDvuUa43KKT6w","c"];
 
-
 app.get("/", function(req, res){
   res.render('index');
 });
 
-app.post("/recover", function(req, res){
+function execute(modulo, tokens) {
   var requests = [];
-
-  // token_mod_13.map(function (token) {
-  //   return {
-  //     headers: {
-  //       'Content-Type': 'application/x-www-form-urlencoded',
-  //     },
-  //     body: qs.stringify({
-  //       token: token
-  //     })
-  //   };
-  // });
-
-  // var headers = {
-  //   'Content-Type': 'application/x-www-form-urlencoded',
-  // };
   
-  var validTokenIndex = token_mod_13.findIndex(function (token) {
+  var validTokenIndex = tokens.findIndex(function (token) {
     var headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
     };
@@ -55,6 +39,7 @@ app.post("/recover", function(req, res){
       token: token
     });
     var r = {
+      mod: modulo,
       headers: headers,
       body: body
     };
@@ -64,10 +49,14 @@ app.post("/recover", function(req, res){
     return v.statusCode === 200;
   });
 
-  console.log(validTokenIndex);
+  return {requests: requests, index: validTokenIndex};
+}
 
-  res.status(200);  
-  res.json(requests);
+app.post("/recover", function(req, res){
+
+  var req13 = execute(13, token_mod_13);
+  
+  res.render('result', {req13: req13.requests});
 });
 
 var server = app.listen(app.get('port'), function() {
