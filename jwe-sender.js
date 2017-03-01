@@ -61,13 +61,15 @@ app.post("/recover", function(req, res){
   var req13 = execute(13, token_mod_13);
 
   var req2447= execute(2447, token_mod_2447);
-var a1=bignum('507483274265132509471575639764027');
-var m1=bignum('269916455047188404153874847098609926219');
-var a2=bignum('27723967616827289286920296659419136');
-var m2=bignum('170141183460469231731687303715884105728');
-var result = crt_bignum([a1, a2],[m1, m2]);
-console.log( result.toString() );
-  res.render('result', {req13: req13.requests, req2447: req2447.requests});
+    
+  var a1=bignum(req13.index);
+  var m1=bignum('13');
+  var a2=bignum(req2447.index);
+  var m2=bignum('2447');
+  var result = crt_bignum([a1, a2],[m1, m2]);
+  
+  console.log( result.toString() );
+  res.render('result', {req13: req13.requests, req2447: req2447.requests, key: result});
 });
 
 var server = app.listen(app.get('port'), function() {
