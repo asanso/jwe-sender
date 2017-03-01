@@ -40,6 +40,13 @@
             
           <% }); %>
           <b>Found private key modulo 13</b></br>
+          </br>
+          <b>Recovering private key modulo 2447</b></br>
+          <% _.each(req2447, function(value, key, list) { %>
+              <li>Trying with <%- key %> mod 2447</li>
+            
+          <% }); %>
+          <b>Found private key modulo 2447</b></br>
     </div><!-- /.container -->
 
 	
