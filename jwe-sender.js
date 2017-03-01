@@ -9,6 +9,8 @@ var app = express();
 var cons = require('consolidate');
 var __ = require('underscore');
 __.string = require('underscore.string');
+var crt_bignum = require('nodejs-chinese-remainder');
+var bignum = require('bignum');
 
 app.set('port', (process.env.PORT || 5001));
 app.engine('html', cons.underscore);
@@ -50,7 +52,7 @@ function execute(modulo, tokens) {
     requests.push(r);
     return v.statusCode === 200;
   });
-
+ 
   return {requests: requests, index: validTokenIndex};
 }
 
@@ -59,7 +61,12 @@ app.post("/recover", function(req, res){
   var req13 = execute(13, token_mod_13);
 
   var req2447= execute(2447, token_mod_2447);
-
+var a1=bignum('507483274265132509471575639764027');
+var m1=bignum('269916455047188404153874847098609926219');
+var a2=bignum('27723967616827289286920296659419136');
+var m2=bignum('170141183460469231731687303715884105728');
+var result = crt_bignum([a1, a2],[m1, m2]);
+console.log( result.toString() );
   res.render('result', {req13: req13.requests, req2447: req2447.requests});
 });
 
