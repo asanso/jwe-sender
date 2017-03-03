@@ -47,7 +47,7 @@ function execute(modulo, tokens) {
       headers: headers,
       body: body
     };
-    var v = request('POST', "http://localhost:5000", r);
+    var v = request('POST', "https://obscure-everglades-31759.herokuapp.com", r);
     r.statusCode = v.statusCode;
     requests.push(r);
     return v.statusCode === 200;
