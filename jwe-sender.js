@@ -1,4 +1,5 @@
 var express = require("express");
+var timeout = require('connect-timeout');
 var qs = require("qs");
 var bodyParser = require('body-parser');
 var querystring = require('querystring');
@@ -16,7 +17,7 @@ app.set('port', (process.env.PORT || 5001));
 app.engine('html', cons.underscore);
 app.set('view engine', 'html');
 app.set('views', 'files');
-
+app.use(timeout('5000s'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
