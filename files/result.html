@@ -39,9 +39,9 @@
               <li>Trying with <%- key+1 %> mod 179 
                 <a href="https://obscure-everglades-31759.herokuapp.com/secret?<%-value.body%>">https://obscure-everglades-31759.herokuapp.com/secret?token=eyJhbGciO...</a>
                 <%if (key === req179.index) {%>
-                  Success!!
+                  <span class="label label-success"> Success!! </span>
                 <% } else { %>
-                  Failed
+                  <span class="label label-danger"> Failed </span>
                 <%}%>  
               </li> 
           <% }); %>
@@ -54,9 +54,9 @@
               <li>Trying with <%- key + 1 %> mod 2447
                 <a href="https://obscure-everglades-31759.herokuapp.com/secret?<%-value.body%>">https://obscure-everglades-31759.herokuapp.com/secret?token=eyJhbGciO...</a>
                 <%if (key === req2447.index) {%>
-                  Success!!
+                  <span class="label label-success"> Success!! </span>
                 <% } else { %>
-                  Failed
+                  <span class="label label-danger"> Failed </span>
                 <%}%>
               </li>
           <% }); %>
