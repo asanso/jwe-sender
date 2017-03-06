@@ -28,27 +28,40 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
+          <h1 class="navbar-brand">The recovered private key is: <span class="label label-primary"><%- key %></label></h1>
         </div>
       </div>
     </nav>
-
     <div class="container">
       <div class="jumbotron">
         <b>Recovering private key modulo 179</b></br>
-		      <% _.each(req179, function(value, key, list) { %>
-              <li>Trying with <%- key+1 %> mod 179</li>
-            
+		      <% _.each(req179.requests, function(value, key, list) { %>
+              <li>Trying with <%- key+1 %> mod 179 
+                <a href="https://obscure-everglades-31759.herokuapp.com/secret?<%-value.body%>">https://obscure-everglades-31759.herokuapp.com/secret?token=eyJhbGciO...</a>
+                <%if (key === req179.index) {%>
+                  Success!!
+                <% } else { %>
+                  Failed
+                <%}%>  
+              </li> 
           <% }); %>
-          <b>Found private key modulo 179</b></br>
+          <b>Found private key modulo 179, try it out:</b>
+          <a href="https://obscure-everglades-31759.herokuapp.com/secret?<%-_.last(req179.requests).body%>">https://obscure-everglades-31759.herokuapp.com/secret?token=eyJhbGciO...</a>
+          </br>
           </br>
           <b>Recovering private key modulo 2447</b></br>
-          <% _.each(req2447, function(value, key, list) { %>
-              <li>Trying with <%- key + 1 %> mod 2447</li>
-            
+          <% _.each(req2447.requests, function(value, key, list) { %>
+              <li>Trying with <%- key + 1 %> mod 2447
+                <a href="https://obscure-everglades-31759.herokuapp.com/secret?<%-value.body%>">https://obscure-everglades-31759.herokuapp.com/secret?token=eyJhbGciO...</a>
+                <%if (key === req2447.index) {%>
+                  Success!!
+                <% } else { %>
+                  Failed
+                <%}%>
+              </li>
           <% }); %>
-          <b>Found private key modulo 2447</b></br>
-
-          <H1> Key is  <%- key %><H1>
+          <b>Found private key modulo 2447 try it out:</b></br>
+          <a href="https://obscure-everglades-31759.herokuapp.com/secret?<%-_.last(req2447.requests).body%>">https://obscure-everglades-31759.herokuapp.com/secret?token=eyJhbGciO...</a>
     </div><!-- /.container -->
 
 	
